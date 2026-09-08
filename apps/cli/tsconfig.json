@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": { "rootDir": "src", "outDir": "dist" },
+  "references": [
+    { "path": "../daemon" },
+    { "path": "../../packages/contracts" },
+    { "path": "../../packages/document-ir" },
+		{ "path": "../../packages/memory-client" },
+		{ "path": "../../packages/permissions" },
+		{ "path": "../../packages/tools" },
+    { "path": "../../packages/evals" },
+    { "path": "../../packages/runtime" }
+  ],
+  "include": ["src/**/*.ts"]
+}

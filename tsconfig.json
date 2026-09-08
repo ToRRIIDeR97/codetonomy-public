@@ -1,0 +1,22 @@
+{
+  "files": [],
+  "references": [
+    { "path": "packages/contracts" },
+    { "path": "packages/telemetry" },
+    { "path": "packages/task-compiler" },
+    { "path": "packages/capability-compiler" },
+    { "path": "packages/permissions" },
+    { "path": "packages/artifacts" },
+    { "path": "packages/document-ir" },
+    { "path": "packages/evals" },
+    { "path": "packages/context-compiler" },
+    { "path": "packages/memory-client" },
+    { "path": "packages/orchestration" },
+    { "path": "packages/tools" },
+    { "path": "packages/verifiers" },
+    { "path": "packages/runtime" },
+    { "path": "apps/dashboard" },
+    { "path": "apps/daemon" },
+    { "path": "apps/cli" }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": { "rootDir": "src", "outDir": "dist" },
+  "references": [
+    { "path": "../contracts" },
+		{ "path": "../document-ir" },
+    { "path": "../orchestration" },
+    { "path": "../task-compiler" },
+    { "path": "../capability-compiler" },
+    { "path": "../context-compiler" },
+    { "path": "../permissions" },
+    { "path": "../telemetry" },
+    { "path": "../tools" },
+    { "path": "../verifiers" }
+  ],
+  "include": ["src/**/*.ts"]
+}

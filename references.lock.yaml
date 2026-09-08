@@ -1,0 +1,33 @@
+schema_version: 1
+
+repositories:
+  reasonix:
+    repository: esengine/deepseek-reasonix
+    commit: 63dae234b27fdf28b0661239bfbaa61ab14435af
+    branch: main-v2
+    license: MIT
+  pi:
+    repository: earendil-works/pi
+    commit: 2e4d23959485279aa2da1a45103de2ea22d46395
+    branch: main
+    license: MIT
+  codex:
+    repository: openai/codex
+    commit: 4ef836f883c38ba6d39e6920f335ce6452b7de33
+    branch: main
+    license: Apache-2.0
+  tencent_agent_memory:
+    repository: TencentCloud/TencentDB-Agent-Memory
+    commit: 4dca55c41bf11cb19b49728dbe495c8e05d25abb
+    branch: feat/server_team
+    license: MIT
+  unlimited_ocr:
+    repository: baidu/Unlimited-OCR
+    commit: d49ff64afffc1f47ab563dc1c589bc2f78808fa4
+    branch: main
+    license: MIT
+  mlx_vlm:
+    repository: Blaizzy/mlx-vlm
+    commit: 61990c9054f2bc7bb8f32541e3238b4a58fe64e5
+    branch: main
+    license: MIT

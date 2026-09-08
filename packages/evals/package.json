@@ -1,0 +1,16 @@
+{
+  "name": "@agent-harness/evals",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": { ".": "./dist/index.js" },
+  "dependencies": {
+    "@agent-harness/artifacts": "workspace:*",
+    "@agent-harness/contracts": "workspace:*",
+    "@agent-harness/document-ir": "workspace:*",
+    "@agent-harness/memory-client": "workspace:*",
+    "@agent-harness/runtime": "workspace:*"
+  }
+}

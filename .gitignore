@@ -1,0 +1,15 @@
+node_modules/
+dist/
+*.tsbuildinfo
+__pycache__/
+*.py[cod]
+.turbo/
+.harness/
+.codetonomy/
+.pnpm-store/
+.reference-repos/
+.DS_Store
+*.db
+*.db-shm
+*.db-wal
+.env

@@ -1,0 +1,23 @@
+{
+  "name": "@agent-harness/cli",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "dependencies": {
+    "@agent-harness/daemon": "workspace:*",
+    "@agent-harness/contracts": "workspace:*",
+    "@agent-harness/document-ir": "workspace:*",
+    "@agent-harness/evals": "workspace:*",
+		"@agent-harness/memory-client": "workspace:*",
+		"@agent-harness/permissions": "workspace:*",
+    "@agent-harness/runtime": "workspace:*",
+		"@agent-harness/tools": "workspace:*",
+    "@earendil-works/pi-tui": "0.84.1",
+    "chalk": "5.6.2"
+  },
+  "optionalDependencies": {
+    "@mariozechner/clipboard": "0.3.9"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "@agent-harness/runtime",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": { ".": "./dist/index.js" },
+  "dependencies": {
+    "@agent-harness/capability-compiler": "workspace:*",
+    "@agent-harness/context-compiler": "workspace:*",
+    "@agent-harness/contracts": "workspace:*",
+		"@agent-harness/document-ir": "workspace:*",
+    "@agent-harness/orchestration": "workspace:*",
+    "@agent-harness/permissions": "workspace:*",
+    "@agent-harness/task-compiler": "workspace:*",
+    "@agent-harness/telemetry": "workspace:*",
+    "@agent-harness/tools": "workspace:*",
+    "@agent-harness/verifiers": "workspace:*",
+    "@earendil-works/pi-agent-core": "0.84.1",
+    "@earendil-works/pi-ai": "0.84.1"
+  }
+}

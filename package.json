@@ -1,0 +1,71 @@
+{
+	"name": "codetonomy",
+  "version": "0.1.0",
+  "private": true,
+	"license": "UNLICENSED",
+  "type": "module",
+  "packageManager": "pnpm@11.16.0",
+  "engines": {
+    "node": ">=22.19.0"
+  },
+	"bin": {
+		"Codetonomy": "./dist/Codetonomy.js"
+	},
+	"files": [
+		"dist/",
+		"deployment/worker-versions.env",
+		"docs/",
+		"scripts/bootstrap-workers.sh",
+		"scripts/bootstrap-workers.mjs",
+		"scripts/fetch-reference-repositories.mjs",
+		"scripts/worker-common.mjs",
+		"scripts/ocr-backend.mjs",
+		"scripts/run-ocr-workers.sh",
+		"scripts/run-ocr-workers.mjs",
+		"scripts/test-ocr.sh",
+		"scripts/test-ocr.mjs",
+		"services/backtesting-worker/requirements.txt",
+		"services/backtesting-worker/worker.py",
+		"services/perception-ocr/requirements.txt",
+		"services/perception-ocr/requirements-mlx.txt",
+		"services/perception-ocr/server.py",
+		"services/perception-ocr/test_integration.py",
+		"services/presentation-worker/requirements.txt",
+		"services/presentation-worker/worker.py",
+		"services/spreadsheet-worker/requirements.txt",
+		"services/spreadsheet-worker/worker.py",
+		"README.md",
+		"THIRD_PARTY_NOTICES.md",
+		"THIRD_PARTY_LICENSES.md",
+		"THIRD_PARTY_REUSE.yaml",
+		"references.lock.yaml"
+	],
+  "scripts": {
+    "build": "tsc -b && node scripts/build-bundle.ts",
+    "check": "tsc -b --pretty false",
+    "dev": "tsc -b && node --import tsx apps/cli/src/index.ts",
+    "start": "node dist/Codetonomy.js",
+    "test": "npm run build && node --import tsx --test tests/*.test.ts",
+	"test:ocr": "node scripts/test-ocr.mjs",
+    "test:sandbox": "node --import tsx --test tests/sandbox-conformance.test.ts",
+	"workers:check": "node scripts/bootstrap-workers.mjs check",
+    "eval": "tsc -b && node --import tsx scripts/run-evals.ts",
+	"qualify:l2": "node --import tsx scripts/qualify-l2.ts",
+	"release": "npm run license:scan && npm run build && node --import tsx scripts/build-release.ts",
+    "license:scan": "node --import tsx scripts/list-dependency-licenses.ts",
+	"license:bundle": "node --import tsx scripts/list-dependency-licenses.ts --write",
+    "verify:references": "node --import tsx scripts/verify-reference-lock.ts",
+		"references:fetch": "node scripts/fetch-reference-repositories.mjs",
+    "verify:reuse": "node --import tsx scripts/verify-third-party-manifest.ts"
+  },
+  "devDependencies": {
+	"@earendil-works/pi-tui": "0.84.1",
+    "@types/node": "22.19.19",
+	"esbuild": "0.28.2",
+    "tsx": "4.22.1",
+    "typescript": "5.9.3"
+  },
+  "optionalDependencies": {
+	"@mariozechner/clipboard": "0.3.9"
+  }
+}

@@ -1,0 +1,164 @@
+schema_version: 1
+
+components:
+  - id: pi-agent-runtime
+    source_repository: earendil-works/pi
+    source_commit: 2e4d23959485279aa2da1a45103de2ea22d46395
+    source_paths:
+      - packages/agent
+      - packages/ai
+    destination:
+      - package.json
+      - packages/runtime/src/index.ts
+      - patches/@earendil-works__pi-ai@0.84.1.patch
+      - packages/tools/package.json
+      - packages/tools/src/index.ts
+    license: MIT
+    integration_method: direct_dependency
+    package_versions:
+      "@earendil-works/pi-agent-core": 0.84.1
+      "@earendil-works/pi-ai": 0.84.1
+    modifications:
+      - Strict JSON tool finalization for OpenAI Completions, Responses, and Anthropic; preserve raw-input tools and streaming previews.
+      - Reject invalid final calls at existing schema validation; emit bounded provider attempt and retry callbacks.
+    tests:
+      - tests/harness.test.ts
+      - tests/tool-repair.test.ts
+      - tests/provider-conformance.test.ts
+  - id: pi-terminal-ui
+    source_repository: earendil-works/pi
+    source_commit: 2e4d23959485279aa2da1a45103de2ea22d46395
+    source_paths:
+      - packages/tui
+    destination:
+      - package.json
+      - apps/cli/package.json
+      - apps/cli/src/setup.ts
+      - apps/cli/src/interaction.ts
+      - apps/cli/src/tui.ts
+      - apps/cli/src/mascot.ts
+    license: MIT
+    integration_method: direct_dependency
+    package_versions:
+      "@earendil-works/pi-tui": 0.84.1
+    modifications: []
+    tests:
+      - tests/cli.test.ts
+  - id: pi-clipboard-image
+    source_repository: earendil-works/pi
+    source_commit: 2e4d23959485279aa2da1a45103de2ea22d46395
+    source_paths:
+      - packages/coding-agent/src/utils/clipboard-native.ts
+      - packages/coding-agent/src/utils/clipboard-image.ts
+      - packages/coding-agent/src/modes/interactive/components/custom-editor.ts
+    destination:
+      - apps/cli/src/clipboard.ts
+      - apps/cli/src/tui.ts
+    license: MIT
+    integration_method: adapted_source
+    package_versions:
+      "@mariozechner/clipboard": 0.3.9
+    modifications:
+      - Keep the native clipboard image path and text fallback; route text-only models through the existing Unlimited OCR client.
+    tests:
+      - tests/cli.test.ts
+      - tests/harness.test.ts
+  - id: pi-release-packaging
+    source_repository: earendil-works/pi
+    source_commit: 2e4d23959485279aa2da1a45103de2ea22d46395
+    source_paths:
+      - scripts/local-release.mjs
+    destination:
+      - scripts/build-release.ts
+    license: MIT
+    integration_method: adapted_source
+    package_versions: {}
+    modifications:
+      - Accept both npm 10 array and npm 11 object-shaped pack metadata.
+    tests:
+      - tests/release.test.ts
+  - id: pi-opencode-model-catalog
+    source_repository: earendil-works/pi
+    source_commit: 2e4d23959485279aa2da1a45103de2ea22d46395
+    source_paths:
+      - packages/ai/scripts/generate-models.ts
+    destination:
+      - apps/cli/src/config.ts
+      - packages/runtime/src/index.ts
+    license: MIT
+    integration_method: adapted_source
+    package_versions:
+      "@earendil-works/pi-ai": 0.84.1
+    modifications:
+      - Intersect the authenticated OpenCode Go model list with live models.dev metadata, persist selected metadata, and retain Pi's provider protocol overrides for MiniMax, Qwen, Kimi, and DeepSeek.
+    tests:
+      - tests/cli.test.ts
+      - tests/provider-conformance.test.ts
+  - id: sglang-worker-launcher
+    source_repository: baidu/Unlimited-OCR
+    source_commit: d49ff64afffc1f47ab563dc1c589bc2f78808fa4
+    source_paths:
+      - wheel/sglang-0.0.0.dev11416+g92e8bb79e-py3-none-any.whl!/sglang/launch_server.py
+    destination:
+      - scripts/run-ocr-workers.sh
+    license: Apache-2.0
+    integration_method: adapted_source
+    package_versions: {}
+    modifications:
+      - Inject the API key after argument parsing so it is absent from process argv while retaining upstream process-tree cleanup.
+    tests:
+      - tests/release.test.ts
+  - id: mlx-vlm-ocr-runtime
+    source_repository: Blaizzy/mlx-vlm
+    source_commit: 61990c9054f2bc7bb8f32541e3238b4a58fe64e5
+    source_paths:
+      - mlx_vlm/models/unlimited_ocr
+      - mlx_vlm/prompt_utils.py
+      - mlx_vlm/generate
+    destination:
+      - services/perception-ocr/server.py
+      - services/perception-ocr/requirements-mlx.txt
+      - scripts/bootstrap-workers.sh
+      - scripts/run-ocr-workers.sh
+    license: MIT
+    integration_method: external_runtime
+    package_versions:
+      mlx-vlm: 0.6.8
+    modifications:
+      - Load the pinned MLX Unlimited-OCR model revision from a verified local snapshot behind the harness-owned engine interface, prevent runtime model downloads, and preserve the upstream base and gundam processor settings.
+    tests:
+      - services/perception-ocr/test_integration.py
+      - tests/release.test.ts
+  - id: tencent-memory-sidecar
+    source_repository: TencentCloud/TencentDB-Agent-Memory
+    source_commit: 4dca55c41bf11cb19b49728dbe495c8e05d25abb
+    source_paths:
+      - MemoryCore/src/gateway
+      - MemoryCore/tdai-gateway.standalone.yaml
+    destination:
+      - apps/cli/src/memory.ts
+      - packages/memory-client/src/index.ts
+      - scripts/bootstrap-workers.sh
+    license: MIT
+    integration_method: external_runtime
+    package_versions: {}
+    modifications: []
+    tests:
+      - tests/harness.test.ts
+      - tests/cli.test.ts
+  - id: reasonix-query-snippet
+    source_repository: esengine/deepseek-reasonix
+    source_commit: 63dae234b27fdf28b0661239bfbaa61ab14435af
+    source_paths:
+      - internal/retrieval/bm25.go
+      - internal/tool/builtin/codeindex.go
+    destination:
+      - packages/tools/src/index.ts
+    license: MIT
+    integration_method: adapted_source
+    package_versions: {}
+    modifications:
+      - Port MakeSnippet to TypeScript and retain the match offset for workspace line references.
+      - Adapt the bounded multi-language regex symbol fallback to attach enclosing symbol metadata to existing workspace chunks without adding tree-sitter.
+    tests:
+      - tests/harness.test.ts
